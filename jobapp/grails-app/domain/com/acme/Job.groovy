@@ -24,6 +24,8 @@ class Job {
 	String shiftWork
 	String warzoneTravel
 	String coopRequirements
+	
+	static searchable = true              // <-- Make Job searchable
 
 	static constraints = {
 		csrRefNo (nullable:true)
