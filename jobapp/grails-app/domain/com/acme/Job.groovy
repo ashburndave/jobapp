@@ -24,7 +24,7 @@ class Job {
 	String shiftWork
 	String warzoneTravel
 	String coopRequirements
-	
+
 	static constraints = {
 		csrRefNo (nullable:true)
 		laborCat (nullable:true)
@@ -34,21 +34,21 @@ class Job {
 		workDescription (nullable:true, maxSize:8000) // might need to be a clob
 		otherRequiredQualifications (nullable:true, maxSize:5000) // might need to be a clob
 		optionalQualifications (nullable:true, maxSize:5000) // might need to be a clob
-		certificationRequirements (nullable:true)
-		conusTravel (nullable:true)
-		oconusTravel (nullable:true)
-		hoursPerYear (nullable:true)
-		scheduleComments (nullable:true)
-		missionCritical (nullable:true)
-		nightWork (nullable:true)
-		pov (nullable:true)
-		pagerDuty (nullable:true)
-		pagerDutyComments (nullable:true)
-		holidayWork (nullable:true)
-		weekendWork (nullable:true)
-		shiftWork (nullable:true)
-		warzoneTravel (nullable:true)
-		coopRequirements (nullable:true)
+		certificationRequirements (nullable:true, maxSize:500)
+		conusTravel (nullable:true, maxSize:500)
+		oconusTravel (nullable:true, maxSize:500)
+		hoursPerYear (nullable:true, maxSize:500)
+		scheduleComments (nullable:true, maxSize:500)
+		missionCritical (nullable:true, maxSize:500)
+		nightWork (nullable:true, maxSize:500)
+		pov (nullable:true, maxSize:500)
+		pagerDuty (nullable:true, maxSize:500)
+		pagerDutyComments (nullable:true, maxSize:500)
+		holidayWork (nullable:true, maxSize:500)
+		weekendWork (nullable:true, maxSize:500)
+		shiftWork (nullable:true, maxSize:500)
+		warzoneTravel (nullable:true, maxSize:500)
+		coopRequirements (nullable:true, maxSize:500)
 	}
 
 }
