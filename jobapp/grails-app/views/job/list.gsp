@@ -32,9 +32,7 @@
 					
 						<g:sortableColumn property="requiredClearanceType" title="${message(code: 'job.requiredClearanceType.label', default: 'Required Clearance Type')}" />
 					
-						<g:sortableColumn property="workLocation" title="${message(code: 'job.workLocation.label', default: 'Work Location')}" />
-					
-						<g:sortableColumn property="workDescription" title="${message(code: 'job.workDescription.label', default: 'Work Description')}" />
+						<g:sortableColumn property="workLocation" title="${message(code: 'job.workLocation.label', default: 'Work Location')}" />					
 					
 					</tr>
 				</thead>
@@ -50,9 +48,7 @@
 					
 						<td>${fieldValue(bean: jobInstance, field: "requiredClearanceType")}</td>
 					
-						<td>${fieldValue(bean: jobInstance, field: "workLocation")}</td>
-					
-						<td>${fieldValue(bean: jobInstance, field: "workDescription")}</td>
+						<td>${fieldValue(bean: jobInstance, field: "workLocation")}</td>					
 					
 					</tr>
 				</g:each>
