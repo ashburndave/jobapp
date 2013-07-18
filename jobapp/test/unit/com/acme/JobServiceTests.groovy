@@ -2,17 +2,24 @@ package com.acme
 
 import grails.test.mixin.*
 import org.junit.*
+import grails.test.GrailsUnitTestCase
+import com.acme.Job
 
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
+
 @TestFor(JobService)
-class JobServiceTests {
+//@TestMixin(DomainClassUnitTestMixin)
+class JobServiceTests {  // extends GrailsUnitTestCase
 
   //def jobService
 
-  void testProcessBuffer1() {
-    def jobService
+  void testProcessBufferBasic() {
+    // Mock the domain class.
+    //    def testInstances = []
+    //    mockDomain(Job, testInstances)
+    def jobService = new JobService()
     def buffer = """value1\tvalue2\tvalue3\tvalue4\tvalue5\tvalue6\tvalue7\tvalue8\tvalue9\tvalue10\tvalue11\tvalue12\tvalue13\tvalue14\tvalue15\tvalue16\tvalue17\tvalue18\tvalue19\tvalue20\tvalue21\tvalue22\tvalue23"""
     def job = jobService.processBuffer(buffer)
     assert (job)
@@ -41,16 +48,25 @@ class JobServiceTests {
     assert ("value23" == job.coopRequirements)
   }
 
-  void testProcessBuffer2() {
-    def jobService
+  void testProcessBufferExtraTabs() {
+    // Mock the domain class.
+    //    def testInstances = []
+    //    mockDomain(Job, testInstances)
+    def jobService = new JobService()
     def buffer = """value1\tvalue2\tvalue3\tvalue4\t"value5a\tvalue5b\tvalue5c"\tvalue6\tvalue7\tvalue8\tvalue9\tvalue10\tvalue11\tvalue12\tvalue13\tvalue14\tvalue15\tvalue16\tvalue17\tvalue18\tvalue19\tvalue20\tvalue21\tvalue22\tvalue23"""
     def job = jobService.processBuffer(buffer)
+    //    println ">>${job.workLocation}<<"
+    //    log ">>${job.workLocation}<<"
     assert (job)
     assert ("value1" == job.csrRefNo)
     assert ("value2" == job.laborCat)
     assert ("value3" == job.fullTimeOrPartTime)
     assert ("value4" == job.requiredClearanceType)
-    assert ("value5" == job.workLocation)
+    // assert ("value5" == job.workLocation)
+    // assert ("value5a value5b value5c" == job.workLocation)
+    // assert ("value5a\tvalue5b\tvalue5c" == job.workLocation)
+     // assert ("\"value5a value5b value5c\"" == job.workLocation)
+    assert (""" "value5a value5b value5c" """.trim() == job.workLocation)
     assert ("value6" == job.workDescription)
     assert ("value7" == job.otherRequiredQualifications)
     assert ("value8" == job.optionalQualifications)
@@ -72,8 +88,14 @@ class JobServiceTests {
     fail "Implement me"
   }
 
-  void testProcessBuffer3() {
-    def jobService
+  /**
+   * This is not a valid test - the code that creates the buffer would have removed all the newlines
+   */
+  void testProcessBufferMultiLine() {
+    // Mock the domain class.
+    //    def testInstances = []
+    //    mockDomain(Job, testInstances)
+    def jobService = new JobService()
     def buffer = """value1\t
 value2\t
 value3\t

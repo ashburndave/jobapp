@@ -62,7 +62,9 @@ class JobService {
       //  println ("job.fullTimeOrPartTime = ${job.fullTimeOrPartTime}")
       //  println ("job.workLocation = ${job.workLocation}")
       //  println ("job.coopRequirements = ${job.coopRequirements}")
-      job.save(flush:true)
+
+      job.save(flush:true) // just for unit testing, comment out the save()
+
       // println ("job.count() = ${job.count()}")
     }
     job
