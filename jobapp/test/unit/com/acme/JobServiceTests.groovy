@@ -46,6 +46,7 @@ class JobServiceTests {  // extends GrailsUnitTestCase
     assert ("value21" == job.shiftWork)
     assert ("value22" == job.warzoneTravel)
     assert ("value23" == job.coopRequirements)
+    //fail "Implement me"
   }
 
   void testProcessBufferExtraTabs() {
@@ -85,7 +86,7 @@ class JobServiceTests {  // extends GrailsUnitTestCase
     assert ("value21" == job.shiftWork)
     assert ("value22" == job.warzoneTravel)
     assert ("value23" == job.coopRequirements)
-    fail "Implement me"
+    //fail "Implement me"
   }
 
   /**
@@ -144,7 +145,7 @@ value23\t"""
     assert ("value21" == job.shiftWork)
     assert ("value22" == job.warzoneTravel)
     assert ("value23" == job.coopRequirements)
-    fail "Implement me"
+    //fail "Implement me"
   }
 
 }

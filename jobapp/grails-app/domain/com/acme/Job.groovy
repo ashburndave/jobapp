@@ -3,7 +3,9 @@ package com.acme
 class Job {
   String csrRefNo
   String laborCat
-  String fullTimeOrPartTime
+  String performanceLevel
+  String positionType
+  //String fullTimeOrPartTime // now positionType
   String requiredClearanceType
   String workLocation
   String workDescription
@@ -25,12 +27,40 @@ class Job {
   String warzoneTravel
   String coopRequirements
 
+  //  LABOR CATEGORY
+  //  PERFORMANCE LEVEL
+  //  POSITION TYPE
+  //  CLEARANCE REQUIRED
+  //  WORK LOCATION
+  //  WORK DESCRIPTION
+  //  MANDATORY SKILLS
+  //  DESIRED SKILLS
+  //  CERTIFICATION REQUIREMENTS
+  //  CONUS TRAVEL
+  //  OCONUS TRAVEL
+  //  REGULAR HOURS PER YEAR
+  //  SCHEDULE COMMENTS
+  //  MISSION CRITICAL
+  //  NIGHT WORK
+  //  LOCAL TRAVEL USING A POV
+  //  PAGER DUTY
+  //  PAGER DUTY COMMENTS
+  //  WORK ON HOLIDAYS
+  //  WORK ON WEEKENDS
+  //  SHIFT WORK
+  //  WARZONE
+  //  COOP
+  //  DATE OF STATUS
+  //  CHANGE UPDATE DATE
+
   static searchable = true              // <-- Make Job searchable
 
   static constraints = {
     csrRefNo (nullable:true)
     laborCat (nullable:true)
-    fullTimeOrPartTime (nullable:true)
+    performanceLevel (nullable:true)
+    positionType (nullable:true) // now positionType
+    // fullTimeOrPartTime (nullable:true)
     requiredClearanceType (nullable:true)
     workLocation (nullable:true)
     workDescription (nullable:true, maxSize:8000) // might need to be a clob

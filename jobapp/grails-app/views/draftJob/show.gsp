@@ -41,24 +41,15 @@
 				</li>
 				</g:if>
 			
-        <g:if test="${jobInstance?.performanceLevel}">
-        <li class="fieldcontain">
-          <span id="performanceLevel-label" class="property-label"><g:message code="job.performanceLevel.label" default="Performance Level" /></span>
-          
-            <span class="property-value" aria-labelledby="performanceLevel"><g:fieldValue bean="${jobInstance}" field="performanceLevel"/></span>
-          
-        </li>
-        </g:if>
-      
-        <g:if test="${jobInstance?.positionType}">
-        <li class="fieldcontain">
-          <span id="positionType-label" class="property-label"><g:message code="job.positionType.label" default="Position Type" /></span>
-          
-            <span class="property-value" aria-labelledby="positionType"><g:fieldValue bean="${jobInstance}" field="positionType"/></span>
-          
-        </li>
-        </g:if>
-      
+				<g:if test="${jobInstance?.fullTimeOrPartTime}">
+				<li class="fieldcontain">
+					<span id="fullTimeOrPartTime-label" class="property-label"><g:message code="job.fullTimeOrPartTime.label" default="Full Time Or Part Time" /></span>
+					
+						<span class="property-value" aria-labelledby="fullTimeOrPartTime-label"><g:fieldValue bean="${jobInstance}" field="fullTimeOrPartTime"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${jobInstance?.requiredClearanceType}">
 				<li class="fieldcontain">
 					<span id="requiredClearanceType-label" class="property-label"><g:message code="job.requiredClearanceType.label" default="Required Clearance Type" /></span>

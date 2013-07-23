@@ -28,10 +28,8 @@
 					
 						<g:sortableColumn property="laborCat" title="${message(code: 'job.laborCat.label', default: 'Labor Cat')}" />
 					
-            <g:sortableColumn property="performanceLevel" title="${message(code: 'job.performanceLevel.label', default: 'Performance Level')}" />
-          
-            <g:sortableColumn property="positionType" title="${message(code: 'job.positionType.label', default: 'Position Type')}" />
-          
+						<g:sortableColumn property="fullTimeOrPartTime" title="${message(code: 'job.fullTimeOrPartTime.label', default: 'Full Time Or Part Time')}" />
+					
 						<g:sortableColumn property="requiredClearanceType" title="${message(code: 'job.requiredClearanceType.label', default: 'Required Clearance Type')}" />
 					
 						<g:sortableColumn property="workLocation" title="${message(code: 'job.workLocation.label', default: 'Work Location')}" />					
@@ -46,10 +44,8 @@
 					
 						<td>${fieldValue(bean: jobInstance, field: "laborCat")}</td>
 					
-            <td>${fieldValue(bean: jobInstance, field: "performanceLevel")}</td>
-          
-            <td>${fieldValue(bean: jobInstance, field: "positionType")}</td>
-          
+						<td>${fieldValue(bean: jobInstance, field: "fullTimeOrPartTime")}</td>
+					
 						<td>${fieldValue(bean: jobInstance, field: "requiredClearanceType")}</td>
 					
 						<td>${fieldValue(bean: jobInstance, field: "workLocation")}</td>					
