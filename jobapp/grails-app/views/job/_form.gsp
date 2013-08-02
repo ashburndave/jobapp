@@ -18,12 +18,20 @@
 	<g:textField name="laborCat" value="${jobInstance?.laborCat}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'fullTimeOrPartTime', 'error')} ">
-	<label for="fullTimeOrPartTime">
-		<g:message code="job.fullTimeOrPartTime.label" default="Full Time Or Part Time" />
+<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'performanceLevel', 'error')} ">
+	<label for="performanceLevel">
+		<g:message code="job.performanceLevel.label" default="Performance Level" />
 		
 	</label>
-	<g:textField name="fullTimeOrPartTime" value="${jobInstance?.fullTimeOrPartTime}"/>
+	<g:textField name="performanceLevel" value="${jobInstance?.performanceLevel}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'positionType', 'error')} ">
+	<label for="positionType">
+		<g:message code="job.positionType.label" default="Position Type" />
+		
+	</label>
+	<g:textField name="positionType" value="${jobInstance?.positionType}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'requiredClearanceType', 'error')} ">
@@ -71,7 +79,7 @@
 		<g:message code="job.certificationRequirements.label" default="Certification Requirements" />
 		
 	</label>
-	<g:textField name="certificationRequirements" value="${jobInstance?.certificationRequirements}"/>
+	<g:textArea name="certificationRequirements" cols="40" rows="5" maxlength="500" value="${jobInstance?.certificationRequirements}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'conusTravel', 'error')} ">
@@ -79,7 +87,7 @@
 		<g:message code="job.conusTravel.label" default="Conus Travel" />
 		
 	</label>
-	<g:textField name="conusTravel" value="${jobInstance?.conusTravel}"/>
+	<g:textArea name="conusTravel" cols="40" rows="5" maxlength="500" value="${jobInstance?.conusTravel}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'oconusTravel', 'error')} ">
@@ -87,7 +95,7 @@
 		<g:message code="job.oconusTravel.label" default="Oconus Travel" />
 		
 	</label>
-	<g:textField name="oconusTravel" value="${jobInstance?.oconusTravel}"/>
+	<g:textArea name="oconusTravel" cols="40" rows="5" maxlength="500" value="${jobInstance?.oconusTravel}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'hoursPerYear', 'error')} ">
@@ -95,7 +103,7 @@
 		<g:message code="job.hoursPerYear.label" default="Hours Per Year" />
 		
 	</label>
-	<g:textField name="hoursPerYear" value="${jobInstance?.hoursPerYear}"/>
+	<g:textArea name="hoursPerYear" cols="40" rows="5" maxlength="500" value="${jobInstance?.hoursPerYear}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'scheduleComments', 'error')} ">
@@ -103,7 +111,7 @@
 		<g:message code="job.scheduleComments.label" default="Schedule Comments" />
 		
 	</label>
-	<g:textField name="scheduleComments" value="${jobInstance?.scheduleComments}"/>
+	<g:textArea name="scheduleComments" cols="40" rows="5" maxlength="500" value="${jobInstance?.scheduleComments}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'missionCritical', 'error')} ">
@@ -111,7 +119,7 @@
 		<g:message code="job.missionCritical.label" default="Mission Critical" />
 		
 	</label>
-	<g:textField name="missionCritical" value="${jobInstance?.missionCritical}"/>
+	<g:textArea name="missionCritical" cols="40" rows="5" maxlength="500" value="${jobInstance?.missionCritical}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'nightWork', 'error')} ">
@@ -119,7 +127,7 @@
 		<g:message code="job.nightWork.label" default="Night Work" />
 		
 	</label>
-	<g:textField name="nightWork" value="${jobInstance?.nightWork}"/>
+	<g:textArea name="nightWork" cols="40" rows="5" maxlength="500" value="${jobInstance?.nightWork}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'pov', 'error')} ">
@@ -127,7 +135,7 @@
 		<g:message code="job.pov.label" default="Pov" />
 		
 	</label>
-	<g:textField name="pov" value="${jobInstance?.pov}"/>
+	<g:textArea name="pov" cols="40" rows="5" maxlength="500" value="${jobInstance?.pov}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'pagerDuty', 'error')} ">
@@ -135,7 +143,7 @@
 		<g:message code="job.pagerDuty.label" default="Pager Duty" />
 		
 	</label>
-	<g:textField name="pagerDuty" value="${jobInstance?.pagerDuty}"/>
+	<g:textArea name="pagerDuty" cols="40" rows="5" maxlength="500" value="${jobInstance?.pagerDuty}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'pagerDutyComments', 'error')} ">
@@ -143,7 +151,7 @@
 		<g:message code="job.pagerDutyComments.label" default="Pager Duty Comments" />
 		
 	</label>
-	<g:textField name="pagerDutyComments" value="${jobInstance?.pagerDutyComments}"/>
+	<g:textArea name="pagerDutyComments" cols="40" rows="5" maxlength="500" value="${jobInstance?.pagerDutyComments}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'holidayWork', 'error')} ">
@@ -151,7 +159,7 @@
 		<g:message code="job.holidayWork.label" default="Holiday Work" />
 		
 	</label>
-	<g:textField name="holidayWork" value="${jobInstance?.holidayWork}"/>
+	<g:textArea name="holidayWork" cols="40" rows="5" maxlength="500" value="${jobInstance?.holidayWork}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'weekendWork', 'error')} ">
@@ -159,7 +167,7 @@
 		<g:message code="job.weekendWork.label" default="Weekend Work" />
 		
 	</label>
-	<g:textField name="weekendWork" value="${jobInstance?.weekendWork}"/>
+	<g:textArea name="weekendWork" cols="40" rows="5" maxlength="500" value="${jobInstance?.weekendWork}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'shiftWork', 'error')} ">
@@ -167,7 +175,7 @@
 		<g:message code="job.shiftWork.label" default="Shift Work" />
 		
 	</label>
-	<g:textField name="shiftWork" value="${jobInstance?.shiftWork}"/>
+	<g:textArea name="shiftWork" cols="40" rows="5" maxlength="500" value="${jobInstance?.shiftWork}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'warzoneTravel', 'error')} ">
@@ -175,7 +183,7 @@
 		<g:message code="job.warzoneTravel.label" default="Warzone Travel" />
 		
 	</label>
-	<g:textField name="warzoneTravel" value="${jobInstance?.warzoneTravel}"/>
+	<g:textArea name="warzoneTravel" cols="40" rows="5" maxlength="500" value="${jobInstance?.warzoneTravel}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'coopRequirements', 'error')} ">
@@ -183,6 +191,22 @@
 		<g:message code="job.coopRequirements.label" default="Coop Requirements" />
 		
 	</label>
-	<g:textField name="coopRequirements" value="${jobInstance?.coopRequirements}"/>
+	<g:textArea name="coopRequirements" cols="40" rows="5" maxlength="500" value="${jobInstance?.coopRequirements}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'dateOfStatusChange', 'error')} ">
+	<label for="dateOfStatusChange">
+		<g:message code="job.dateOfStatusChange.label" default="Date Of Status Change" />
+		
+	</label>
+	<g:textArea name="dateOfStatusChange" cols="40" rows="5" maxlength="500" value="${jobInstance?.dateOfStatusChange}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'updateDate', 'error')} ">
+	<label for="updateDate">
+		<g:message code="job.updateDate.label" default="Update Date" />
+		
+	</label>
+	<g:textArea name="updateDate" cols="40" rows="5" maxlength="2000" value="${jobInstance?.updateDate}"/>
 </div>
 

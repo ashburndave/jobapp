@@ -2,31 +2,40 @@ import com.acme.Job
 import com.acme.DraftJob
 import com.acme.JobService
 
-
 class BootStrap {
 
-  // 07/11/2013  06:42 AM           441,524 Draft_CSRs_Block1_2jul13.xlsx
-  // 07/11/2013  06:42 AM           205,531 Draft_CSRs_block2_3jul13.xlsx
-  // 07/11/2013  06:43 AM           607,149 Draft CSRs 10Jul13.xlsx
-  // 07/11/2013  06:46 AM         1,455,076 Draft_CSRs_Block1_2jul13.txt
-  // 07/11/2013  06:47 AM           646,099 Draft_CSRs_block2_3jul13.txt
-  // 07/11/2013  06:48 AM         2,282,670 Draft_CSRs_10Jul13.txt
+  //  07/10/2013  05:53 AM         1,455,076 Draft_CSRs_Block1_2jul13tab.txt
+  //  07/11/2013  06:42 AM           441,524 Draft_CSRs_Block1_2jul13.xlsx
+  //  07/11/2013  06:42 AM           205,531 Draft_CSRs_block2_3jul13.xlsx
+  //  07/11/2013  06:43 AM           607,149 Draft CSRs 10Jul13.xlsx
+  //  07/11/2013  06:46 AM         1,455,076 Draft_CSRs_Block1_2jul13.txt
+  //  07/11/2013  06:47 AM           646,099 Draft_CSRs_block2_3jul13.txt
+  //  07/11/2013  06:48 AM         2,282,670 Draft_CSRs_10Jul13.txt
+  //  07/22/2013  06:30 PM         1,429,560 i2S CSRs July 22 2013.xlsx
+  //  07/22/2013  06:38 PM         4,192,881 i2S_CSRs_July_22_2013.txt
+  //  07/31/2013  05:32 AM         4,173,303 Updated i2S CSRs Dates July 29, 2013.xlsx
+  //  07/31/2013  05:37 AM         5,623,446 Updated_i2S_CSRs_Dates_July_29_2013.txt
 
   def jobService
 
-  //def csrDelim = "DRAFT"
-  //def csrDelim = "2013-"
-  //def expectedNumberOfFields = 26 // was 23 in first set of data
+  def draftCsrDelim = "DRAFT"
+  def finalCsrDelim = "2013-"
+  def draftExpectedNumberOfFields = 23 // was 23 in first set of data (3 files)
+  def finalExpectedNumberOfFields = 26 // was 23 in most recent set of data (2 files)
 
   def init = { servletContext ->
     if (Job.count() == 0) {
       //initJobFromTabDelimitedFiles()
 
       initDraftJobFromTabDelimitedFiles(["/LocalApps/Draft_CSRs_Block1_2jul13.txt",
-        "/LocalApps/Draft_CSRs_block2_3jul13.txt",
-        "/LocalApps/Draft_CSRs_10Jul13.txt"],"DRAFT",23)
+        "/LocalApps/Draft_CSRs_block2_3jul13.txt", "/LocalApps/Draft_CSRs_10Jul13.txt"],
+      draftCsrDelim, draftExpectedNumberOfFields)
 
-      initJobFromTabDelimitedFiles(["/LocalApps/i2S_CSRs_July_22_2013.txt"],"2013-",26)
+      //      initFinalJobFromTabDelimitedFiles(["/LocalApps/i2S_CSRs_July_22_2013.txt"],
+      //      finalCsrDelim, finalExpectedNumberOfFields)
+
+      initFinalJobFromTabDelimitedFiles(["/LocalApps/Updated_i2S_CSRs_Dates_July_29_2013.txt"],
+      finalCsrDelim, finalExpectedNumberOfFields)
     }
   }
 
@@ -50,6 +59,8 @@ class BootStrap {
     }
     def filejobs = [:]
     def problems = []
+    def failures = []
+    def successes = []
     def job = null
     for (String filename : filenames) {
       def buffer = ""
@@ -70,6 +81,14 @@ class BootStrap {
             job = processDraftJobBuffer(buffer)
             if (job && job.csrRefNo) {
               joblist.add(job.csrRefNo)
+              if (!job.save(flush: true)) {
+                failures.add(job.csrRefNo)
+                job.errors.allErrors.each {
+                  println ">>>>> ${job.csrRefNo} $it"
+                }
+              } else {
+                successes.add(job.csrRefNo)
+              }
             }
           }
           buffer = ""
@@ -87,23 +106,35 @@ class BootStrap {
         job = processDraftJobBuffer(buffer)
         if (job && job.csrRefNo) {
           joblist.add(job.csrRefNo)
+          if (!job.save(flush: true)) {
+            failures.add(job.csrRefNo)
+            job.errors.allErrors.each {
+              println ">>>>> ${job.csrRefNo} $it"
+            }
+          } else {
+            successes.add(job.csrRefNo)
+          }
         }
       }
     }
     for (int i = 0 ; i < 50 ; i++) {
-      println "   i = $i   maxSize[i] = ${maxSize[i]}"
+      if (maxSize[i] > 0) {
+        println "   i = $i   maxSize[i] = ${maxSize[i]}"
+      }
     }
-    problems.each{println it}
+    // problems.each{println it}
     def grandTotal = 0
     filejobs.each{key, value ->
       println "$key   ${value.size()}   ${value.sort()}"
       grandTotal += value.size()
     }
     println "grandTotal = $grandTotal"
+    println "failures.size() = ${failures.size()}"
+    println "successes.size() = ${successes.size()}"
   }
 
 
-  def initJobFromTabDelimitedFiles(def filenames, def csrDelim, def expectedNumberOfFields) {
+  def initFinalJobFromTabDelimitedFiles(def filenames, def csrDelim, def expectedNumberOfFields) {
     //    def file = new File("C:\\LocalApps\\jobstabdelim.txt")
     //    def filenames = ["C:\\LocalApps\\Draft_CSRs_Block1_2jul13.txt",
     //      "C:\\LocalApps\\Draft_CSRs_block2_3jul13.txt",
@@ -120,6 +151,8 @@ class BootStrap {
     }
     def filejobs = [:]
     def problems = []
+    def failures = []
+    def successes = []
     def job = null
     for (String filename : filenames) {
       def buffer = ""
@@ -132,14 +165,25 @@ class BootStrap {
         // if (linenum < 100) { // during testing, only parse first 100 lines
         if (line.startsWith(csrDelim)) {
           divider = "--------------------------------------------------------------------------------"
-          // println divider
-          // println buffer
-          // println divider
+          //           println divider
+          //           println buffer
+          //           println divider
           if (buffer && buffer.startsWith(csrDelim)) {
             updateMaxSize(buffer, expectedNumberOfFields, maxSize, filename, problems)
-            job = processJobBuffer(buffer)
+            job = processFinalJobBuffer(buffer)
             if (job && job.csrRefNo) {
               joblist.add(job.csrRefNo)
+              if (job?.updateDate && job?.updateDate?.size() > 20) {
+                println "${job.csrRefNo} ${job?.updateDate?.size()} >>>>>${job?.updateDate}<<<<<"
+              }
+              if (!job.save(flush: true)) {
+                failures.add(job.csrRefNo)
+                job.errors.allErrors.each {
+                  println ">>>>> ${job.csrRefNo} $it"
+                }
+              } else {
+                successes.add(job.csrRefNo)
+              }
             }
           }
           buffer = ""
@@ -154,22 +198,38 @@ class BootStrap {
       }
       if (buffer && buffer.startsWith(csrDelim)) {
         updateMaxSize(buffer, expectedNumberOfFields, maxSize, filename, problems)
-        job = processJobBuffer(buffer)
+        job = processFinalJobBuffer(buffer)
         if (job && job.csrRefNo) {
           joblist.add(job.csrRefNo)
+          if (job?.updateDate && job?.updateDate?.size() > 20) {
+            println "${job.csrRefNo} ${job?.updateDate?.size()} >>>>>${job?.updateDate}<<<<<"
+          }
+
+          if (!job.save(flush: true)) {
+            failures.add(job.csrRefNo)
+            job.errors.allErrors.each {
+              println ">>>>> ${job.csrRefNo} $it"
+            }
+          } else {
+            successes.add(job.csrRefNo)
+          }
         }
       }
     }
     for (int i = 0 ; i < 50 ; i++) {
-      println "   i = $i   maxSize[i] = ${maxSize[i]}"
+      if (maxSize[i] > 0) {
+        println "   i = $i   maxSize[i] = ${maxSize[i]}"
+      }
     }
-    problems.each{println it}
+    // problems.each{println it}
     def grandTotal = 0
     filejobs.each{key, value ->
       println "$key   ${value.size()}   ${value.sort()}"
       grandTotal += value.size()
     }
     println "grandTotal = $grandTotal"
+    println "failures.size() = ${failures.size()}"
+    println "successes.size() = ${successes.size()}"
   }
 
   def updateMaxSize = {buffer, expectedNumberOfFields, maxSize, filename, problems ->
@@ -179,20 +239,23 @@ class BootStrap {
     if (n != expectedNumberOfFields) { // this should not happen, but what if tabs are present in spreadsheet cells
       // in the first set of jobs, DRAFT188 apparently has tabs in one of the spreadsheet cells
       problems.add "$filename  ${value[0]}  $n"
-      for (int i = 0 ; i < n ; i++) {
-        println "   i = $i   size = ${value[i].size()}   value = ${value[i]}"
-      }
+      //      for (int i = 0 ; i < n ; i++) {
+      //        if (value[i] && value[i].size() > 0) {
+      //          println "   i = $i   size = ${value[i].size()}   value = ${value[i]}"
+      //        }
+      //      }
     }
+    def maxSizeLen = maxSize.length
     if (n > 0) {
       for (int i = 0 ; i < n ; i++) {
-        if (maxSize[i] < value[i].size()) {
+        if (i < maxSizeLen && maxSize[i] < value[i].size()) {
           maxSize[i] = value[i].size()
         }
       }
     }
   }
 
-  public Job processJobBuffer(String buffer) {
+  public Job processFinalJobBuffer(String buffer) {
     def job = null
     // code to process the buffer
     def value = buffer.split("\t")
@@ -218,6 +281,9 @@ class BootStrap {
           fieldQuoted = false
         }
         // println "   i = $i   size = ${value[i].size()}   value = ${value[i]}"
+        if (fieldValue) {
+          fieldValue = fieldValue.trim()
+        }
         switch (fieldIndex) {
           case 0: job.csrRefNo = fieldValue; break;
           case 1: job.laborCat = fieldValue; break;
@@ -242,7 +308,9 @@ class BootStrap {
           case 20: job.weekendWork = fieldValue; break;
           case 21: job.shiftWork = fieldValue; break;
           case 22: job.warzoneTravel = fieldValue; break;
-          case 23: job.coopRequirements = fieldValue;
+          case 23: job.coopRequirements = fieldValue; break;
+          case 24: job.dateOfStatusChange = fieldValue; break;
+          case 25: job.updateDate = fieldValue;
         }
         if (!fieldQuoted) {
           fieldIndex++
@@ -254,7 +322,7 @@ class BootStrap {
       //  println ("job.workLocation = ${job.workLocation}")
       //  println ("job.coopRequirements = ${job.coopRequirements}")
 
-      job.save(flush:true) // just for unit testing, comment out the save()
+      // job.save(flush:true) // just for unit testing, comment out the save()
 
       // println ("job.count() = ${job.count()}")
     }
@@ -287,6 +355,9 @@ class BootStrap {
           fieldQuoted = false
         }
         // println "   i = $i   size = ${value[i].size()}   value = ${value[i]}"
+        if (fieldValue) {
+          fieldValue = fieldValue.trim()
+        }
         switch (fieldIndex) {
           case 0: job.csrRefNo = fieldValue; break;
           case 1: job.laborCat = fieldValue; break;
@@ -322,7 +393,7 @@ class BootStrap {
       //  println ("job.workLocation = ${job.workLocation}")
       //  println ("job.coopRequirements = ${job.coopRequirements}")
 
-      job.save(flush:true) // just for unit testing, comment out the save()
+      // job.save(flush:true) // just for unit testing, comment out the save()
 
       // println ("job.count() = ${job.count()}")
     }

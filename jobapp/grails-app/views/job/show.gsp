@@ -41,24 +41,24 @@
 				</li>
 				</g:if>
 			
-        <g:if test="${jobInstance?.performanceLevel}">
-        <li class="fieldcontain">
-          <span id="performanceLevel-label" class="property-label"><g:message code="job.performanceLevel.label" default="Performance Level" /></span>
-          
-            <span class="property-value" aria-labelledby="performanceLevel"><g:fieldValue bean="${jobInstance}" field="performanceLevel"/></span>
-          
-        </li>
-        </g:if>
-      
-        <g:if test="${jobInstance?.positionType}">
-        <li class="fieldcontain">
-          <span id="positionType-label" class="property-label"><g:message code="job.positionType.label" default="Position Type" /></span>
-          
-            <span class="property-value" aria-labelledby="positionType"><g:fieldValue bean="${jobInstance}" field="positionType"/></span>
-          
-        </li>
-        </g:if>
-      
+				<g:if test="${jobInstance?.performanceLevel}">
+				<li class="fieldcontain">
+					<span id="performanceLevel-label" class="property-label"><g:message code="job.performanceLevel.label" default="Performance Level" /></span>
+					
+						<span class="property-value" aria-labelledby="performanceLevel-label"><g:fieldValue bean="${jobInstance}" field="performanceLevel"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${jobInstance?.positionType}">
+				<li class="fieldcontain">
+					<span id="positionType-label" class="property-label"><g:message code="job.positionType.label" default="Position Type" /></span>
+					
+						<span class="property-value" aria-labelledby="positionType-label"><g:fieldValue bean="${jobInstance}" field="positionType"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${jobInstance?.requiredClearanceType}">
 				<li class="fieldcontain">
 					<span id="requiredClearanceType-label" class="property-label"><g:message code="job.requiredClearanceType.label" default="Required Clearance Type" /></span>
@@ -235,6 +235,24 @@
 					<span id="coopRequirements-label" class="property-label"><g:message code="job.coopRequirements.label" default="Coop Requirements" /></span>
 					
 						<span class="property-value" aria-labelledby="coopRequirements-label"><g:fieldValue bean="${jobInstance}" field="coopRequirements"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${jobInstance?.dateOfStatusChange}">
+				<li class="fieldcontain">
+					<span id="dateOfStatusChange-label" class="property-label"><g:message code="job.dateOfStatusChange.label" default="Date Of Status Change" /></span>
+					
+						<span class="property-value" aria-labelledby="dateOfStatusChange-label"><g:fieldValue bean="${jobInstance}" field="dateOfStatusChange"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${jobInstance?.updateDate}">
+				<li class="fieldcontain">
+					<span id="updateDate-label" class="property-label"><g:message code="job.updateDate.label" default="Update Date" /></span>
+					
+						<span class="property-value" aria-labelledby="updateDate-label"><g:fieldValue bean="${jobInstance}" field="updateDate"/></span>
 					
 				</li>
 				</g:if>

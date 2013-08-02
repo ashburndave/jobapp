@@ -26,6 +26,8 @@ class Job {
   String shiftWork
   String warzoneTravel
   String coopRequirements
+  String dateOfStatusChange
+  String updateDate
 
   //  LABOR CATEGORY
   //  PERFORMANCE LEVEL
@@ -81,6 +83,8 @@ class Job {
     shiftWork (nullable:true, maxSize:500)
     warzoneTravel (nullable:true, maxSize:500)
     coopRequirements (nullable:true, maxSize:500)
+    dateOfStatusChange (nullable:true, maxSize:500)
+    updateDate (nullable:true, maxSize:2000)
   }
 
 }
