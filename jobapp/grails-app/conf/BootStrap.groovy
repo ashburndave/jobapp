@@ -34,7 +34,14 @@ class BootStrap {
       //      initFinalJobFromTabDelimitedFiles(["/LocalApps/i2S_CSRs_July_22_2013.txt"],
       //      finalCsrDelim, finalExpectedNumberOfFields)
 
-      initFinalJobFromTabDelimitedFiles(["/LocalApps/Updated_i2S_CSRs_Dates_July_29_2013.txt"],
+      //      initFinalJobFromTabDelimitedFiles(["/LocalApps/Updated_i2S_CSRs_Dates_July_29_2013.txt"],
+      //      finalCsrDelim, finalExpectedNumberOfFields)
+
+      //      initFinalJobFromTabDelimitedFiles(["/LocalApps/Final_CSRs_grp3_5aug13.txt"],
+      //      finalCsrDelim, finalExpectedNumberOfFields)
+
+      initFinalJobFromTabDelimitedFiles(["/LocalApps/Updated_i2S_CSRs_Dates_July_29_2013.txt",
+        "/LocalApps/Final_CSRs_grp3_5aug13.txt"],
       finalCsrDelim, finalExpectedNumberOfFields)
     }
   }
