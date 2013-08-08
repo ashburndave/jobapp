@@ -43,7 +43,7 @@ class BootStrap {
       //      finalCsrDelim, finalExpectedNumberOfFields)
 
       //      initFinalJobFromTabDelimitedFiles(["/LocalApps/Final_CSRs_grp3_5aug13.txt"],
-      //      finalCsrDelim, finalExpectedNumberOfFields)
+      //      finalCsrDelim, finalSourcePrefix, finalExpectedNumberOfFields)
 
       initFinalJobFromTabDelimitedFiles(["/LocalApps/Updated_i2S_CSRs_Dates_July_29_2013.txt",
         "/LocalApps/Final_CSRs_grp3_5aug13.txt"],
