@@ -23,6 +23,15 @@
 			</g:if>
 			<ol class="property-list job">
 			
+				<g:if test="${jobInstance?.source}">
+				<li class="fieldcontain">
+					<span id="source-label" class="property-label"><g:message code="job.source.label" default="Source" /></span>
+					
+						<span class="property-value" aria-labelledby="source-label"><g:fieldValue bean="${jobInstance}" field="source"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${jobInstance?.csrRefNo}">
 				<li class="fieldcontain">
 					<span id="csrRefNo-label" class="property-label"><g:message code="job.csrRefNo.label" default="Csr Ref No" /></span>

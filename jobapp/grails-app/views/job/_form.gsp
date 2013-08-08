@@ -2,6 +2,14 @@
 
 
 
+<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'source', 'error')} ">
+	<label for="source">
+		<g:message code="job.source.label" default="Source" />
+		
+	</label>
+	<g:textField name="source" value="${jobInstance?.source}"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'csrRefNo', 'error')} ">
 	<label for="csrRefNo">
 		<g:message code="job.csrRefNo.label" default="Csr Ref No" />

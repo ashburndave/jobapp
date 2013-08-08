@@ -1,188 +1,196 @@
-<%@ page import="com.acme.Job" %>
+<%@ page import="com.acme.DraftJob" %>
 
 
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'csrRefNo', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'source', 'error')} ">
+	<label for="source">
+		<g:message code="draftJob.source.label" default="Source" />
+		
+	</label>
+	<g:textField name="source" value="${draftJobInstance?.source}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'csrRefNo', 'error')} ">
 	<label for="csrRefNo">
-		<g:message code="job.csrRefNo.label" default="Csr Ref No" />
+		<g:message code="draftJob.csrRefNo.label" default="Csr Ref No" />
 		
 	</label>
-	<g:textField name="csrRefNo" value="${jobInstance?.csrRefNo}"/>
+	<g:textField name="csrRefNo" value="${draftJobInstance?.csrRefNo}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'laborCat', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'laborCat', 'error')} ">
 	<label for="laborCat">
-		<g:message code="job.laborCat.label" default="Labor Cat" />
+		<g:message code="draftJob.laborCat.label" default="Labor Cat" />
 		
 	</label>
-	<g:textField name="laborCat" value="${jobInstance?.laborCat}"/>
+	<g:textField name="laborCat" value="${draftJobInstance?.laborCat}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'fullTimeOrPartTime', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'fullTimeOrPartTime', 'error')} ">
 	<label for="fullTimeOrPartTime">
-		<g:message code="job.fullTimeOrPartTime.label" default="Full Time Or Part Time" />
+		<g:message code="draftJob.fullTimeOrPartTime.label" default="Full Time Or Part Time" />
 		
 	</label>
-	<g:textField name="fullTimeOrPartTime" value="${jobInstance?.fullTimeOrPartTime}"/>
+	<g:textField name="fullTimeOrPartTime" value="${draftJobInstance?.fullTimeOrPartTime}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'requiredClearanceType', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'requiredClearanceType', 'error')} ">
 	<label for="requiredClearanceType">
-		<g:message code="job.requiredClearanceType.label" default="Required Clearance Type" />
+		<g:message code="draftJob.requiredClearanceType.label" default="Required Clearance Type" />
 		
 	</label>
-	<g:textField name="requiredClearanceType" value="${jobInstance?.requiredClearanceType}"/>
+	<g:textField name="requiredClearanceType" value="${draftJobInstance?.requiredClearanceType}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'workLocation', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'workLocation', 'error')} ">
 	<label for="workLocation">
-		<g:message code="job.workLocation.label" default="Work Location" />
+		<g:message code="draftJob.workLocation.label" default="Work Location" />
 		
 	</label>
-	<g:textField name="workLocation" value="${jobInstance?.workLocation}"/>
+	<g:textField name="workLocation" value="${draftJobInstance?.workLocation}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'workDescription', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'workDescription', 'error')} ">
 	<label for="workDescription">
-		<g:message code="job.workDescription.label" default="Work Description" />
+		<g:message code="draftJob.workDescription.label" default="Work Description" />
 		
 	</label>
-	<g:textArea name="workDescription" cols="40" rows="5" maxlength="8000" value="${jobInstance?.workDescription}"/>
+	<g:textArea name="workDescription" cols="40" rows="5" maxlength="8000" value="${draftJobInstance?.workDescription}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'otherRequiredQualifications', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'otherRequiredQualifications', 'error')} ">
 	<label for="otherRequiredQualifications">
-		<g:message code="job.otherRequiredQualifications.label" default="Other Required Qualifications" />
+		<g:message code="draftJob.otherRequiredQualifications.label" default="Other Required Qualifications" />
 		
 	</label>
-	<g:textArea name="otherRequiredQualifications" cols="40" rows="5" maxlength="5000" value="${jobInstance?.otherRequiredQualifications}"/>
+	<g:textArea name="otherRequiredQualifications" cols="40" rows="5" maxlength="5000" value="${draftJobInstance?.otherRequiredQualifications}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'optionalQualifications', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'optionalQualifications', 'error')} ">
 	<label for="optionalQualifications">
-		<g:message code="job.optionalQualifications.label" default="Optional Qualifications" />
+		<g:message code="draftJob.optionalQualifications.label" default="Optional Qualifications" />
 		
 	</label>
-	<g:textArea name="optionalQualifications" cols="40" rows="5" maxlength="5000" value="${jobInstance?.optionalQualifications}"/>
+	<g:textArea name="optionalQualifications" cols="40" rows="5" maxlength="5000" value="${draftJobInstance?.optionalQualifications}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'certificationRequirements', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'certificationRequirements', 'error')} ">
 	<label for="certificationRequirements">
-		<g:message code="job.certificationRequirements.label" default="Certification Requirements" />
+		<g:message code="draftJob.certificationRequirements.label" default="Certification Requirements" />
 		
 	</label>
-	<g:textField name="certificationRequirements" value="${jobInstance?.certificationRequirements}"/>
+	<g:textArea name="certificationRequirements" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.certificationRequirements}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'conusTravel', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'conusTravel', 'error')} ">
 	<label for="conusTravel">
-		<g:message code="job.conusTravel.label" default="Conus Travel" />
+		<g:message code="draftJob.conusTravel.label" default="Conus Travel" />
 		
 	</label>
-	<g:textField name="conusTravel" value="${jobInstance?.conusTravel}"/>
+	<g:textArea name="conusTravel" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.conusTravel}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'oconusTravel', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'oconusTravel', 'error')} ">
 	<label for="oconusTravel">
-		<g:message code="job.oconusTravel.label" default="Oconus Travel" />
+		<g:message code="draftJob.oconusTravel.label" default="Oconus Travel" />
 		
 	</label>
-	<g:textField name="oconusTravel" value="${jobInstance?.oconusTravel}"/>
+	<g:textArea name="oconusTravel" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.oconusTravel}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'hoursPerYear', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'hoursPerYear', 'error')} ">
 	<label for="hoursPerYear">
-		<g:message code="job.hoursPerYear.label" default="Hours Per Year" />
+		<g:message code="draftJob.hoursPerYear.label" default="Hours Per Year" />
 		
 	</label>
-	<g:textField name="hoursPerYear" value="${jobInstance?.hoursPerYear}"/>
+	<g:textArea name="hoursPerYear" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.hoursPerYear}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'scheduleComments', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'scheduleComments', 'error')} ">
 	<label for="scheduleComments">
-		<g:message code="job.scheduleComments.label" default="Schedule Comments" />
+		<g:message code="draftJob.scheduleComments.label" default="Schedule Comments" />
 		
 	</label>
-	<g:textField name="scheduleComments" value="${jobInstance?.scheduleComments}"/>
+	<g:textArea name="scheduleComments" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.scheduleComments}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'missionCritical', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'missionCritical', 'error')} ">
 	<label for="missionCritical">
-		<g:message code="job.missionCritical.label" default="Mission Critical" />
+		<g:message code="draftJob.missionCritical.label" default="Mission Critical" />
 		
 	</label>
-	<g:textField name="missionCritical" value="${jobInstance?.missionCritical}"/>
+	<g:textArea name="missionCritical" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.missionCritical}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'nightWork', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'nightWork', 'error')} ">
 	<label for="nightWork">
-		<g:message code="job.nightWork.label" default="Night Work" />
+		<g:message code="draftJob.nightWork.label" default="Night Work" />
 		
 	</label>
-	<g:textField name="nightWork" value="${jobInstance?.nightWork}"/>
+	<g:textArea name="nightWork" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.nightWork}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'pov', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'pov', 'error')} ">
 	<label for="pov">
-		<g:message code="job.pov.label" default="Pov" />
+		<g:message code="draftJob.pov.label" default="Pov" />
 		
 	</label>
-	<g:textField name="pov" value="${jobInstance?.pov}"/>
+	<g:textArea name="pov" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.pov}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'pagerDuty', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'pagerDuty', 'error')} ">
 	<label for="pagerDuty">
-		<g:message code="job.pagerDuty.label" default="Pager Duty" />
+		<g:message code="draftJob.pagerDuty.label" default="Pager Duty" />
 		
 	</label>
-	<g:textField name="pagerDuty" value="${jobInstance?.pagerDuty}"/>
+	<g:textArea name="pagerDuty" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.pagerDuty}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'pagerDutyComments', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'pagerDutyComments', 'error')} ">
 	<label for="pagerDutyComments">
-		<g:message code="job.pagerDutyComments.label" default="Pager Duty Comments" />
+		<g:message code="draftJob.pagerDutyComments.label" default="Pager Duty Comments" />
 		
 	</label>
-	<g:textField name="pagerDutyComments" value="${jobInstance?.pagerDutyComments}"/>
+	<g:textArea name="pagerDutyComments" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.pagerDutyComments}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'holidayWork', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'holidayWork', 'error')} ">
 	<label for="holidayWork">
-		<g:message code="job.holidayWork.label" default="Holiday Work" />
+		<g:message code="draftJob.holidayWork.label" default="Holiday Work" />
 		
 	</label>
-	<g:textField name="holidayWork" value="${jobInstance?.holidayWork}"/>
+	<g:textArea name="holidayWork" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.holidayWork}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'weekendWork', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'weekendWork', 'error')} ">
 	<label for="weekendWork">
-		<g:message code="job.weekendWork.label" default="Weekend Work" />
+		<g:message code="draftJob.weekendWork.label" default="Weekend Work" />
 		
 	</label>
-	<g:textField name="weekendWork" value="${jobInstance?.weekendWork}"/>
+	<g:textArea name="weekendWork" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.weekendWork}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'shiftWork', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'shiftWork', 'error')} ">
 	<label for="shiftWork">
-		<g:message code="job.shiftWork.label" default="Shift Work" />
+		<g:message code="draftJob.shiftWork.label" default="Shift Work" />
 		
 	</label>
-	<g:textField name="shiftWork" value="${jobInstance?.shiftWork}"/>
+	<g:textArea name="shiftWork" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.shiftWork}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'warzoneTravel', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'warzoneTravel', 'error')} ">
 	<label for="warzoneTravel">
-		<g:message code="job.warzoneTravel.label" default="Warzone Travel" />
+		<g:message code="draftJob.warzoneTravel.label" default="Warzone Travel" />
 		
 	</label>
-	<g:textField name="warzoneTravel" value="${jobInstance?.warzoneTravel}"/>
+	<g:textArea name="warzoneTravel" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.warzoneTravel}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: jobInstance, field: 'coopRequirements', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: draftJobInstance, field: 'coopRequirements', 'error')} ">
 	<label for="coopRequirements">
-		<g:message code="job.coopRequirements.label" default="Coop Requirements" />
+		<g:message code="draftJob.coopRequirements.label" default="Coop Requirements" />
 		
 	</label>
-	<g:textField name="coopRequirements" value="${jobInstance?.coopRequirements}"/>
+	<g:textArea name="coopRequirements" cols="40" rows="5" maxlength="500" value="${draftJobInstance?.coopRequirements}"/>
 </div>
 

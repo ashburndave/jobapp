@@ -15,13 +15,18 @@ class BootStrap {
   //  07/22/2013  06:38 PM         4,192,881 i2S_CSRs_July_22_2013.txt
   //  07/31/2013  05:32 AM         4,173,303 Updated i2S CSRs Dates July 29, 2013.xlsx
   //  07/31/2013  05:37 AM         5,623,446 Updated_i2S_CSRs_Dates_July_29_2013.txt
+  //  08/07/2013  06:56 AM           178,619 Final CSRs grp3 5aug13.xlsx
+  //  08/07/2013  06:59 AM           606,282 Final_CSRs_grp3_5aug13.txt
 
   def jobService
 
   def draftCsrDelim = "DRAFT"
   def finalCsrDelim = "2013-"
-  def draftExpectedNumberOfFields = 23 // was 23 in first set of data (3 files)
-  def finalExpectedNumberOfFields = 26 // was 23 in most recent set of data (2 files)
+  def draftExpectedNumberOfFields = 23 // was 23 in first set of "draft" data (3 files)
+  def finalExpectedNumberOfFields = 26 // was 26 in more recent set of "final" data (2 files)
+  def draftSourcePrefix = "draftfile"
+  def finalSourcePrefix = "finalfile"
+
 
   def init = { servletContext ->
     if (Job.count() == 0) {
@@ -29,7 +34,7 @@ class BootStrap {
 
       initDraftJobFromTabDelimitedFiles(["/LocalApps/Draft_CSRs_Block1_2jul13.txt",
         "/LocalApps/Draft_CSRs_block2_3jul13.txt", "/LocalApps/Draft_CSRs_10Jul13.txt"],
-      draftCsrDelim, draftExpectedNumberOfFields)
+      draftCsrDelim, draftSourcePrefix, draftExpectedNumberOfFields)
 
       //      initFinalJobFromTabDelimitedFiles(["/LocalApps/i2S_CSRs_July_22_2013.txt"],
       //      finalCsrDelim, finalExpectedNumberOfFields)
@@ -42,14 +47,14 @@ class BootStrap {
 
       initFinalJobFromTabDelimitedFiles(["/LocalApps/Updated_i2S_CSRs_Dates_July_29_2013.txt",
         "/LocalApps/Final_CSRs_grp3_5aug13.txt"],
-      finalCsrDelim, finalExpectedNumberOfFields)
+      finalCsrDelim, finalSourcePrefix, finalExpectedNumberOfFields)
     }
   }
 
   def destroy = {
   }
 
-  def initDraftJobFromTabDelimitedFiles(def filenames, def csrDelim, def expectedNumberOfFields) {
+  def initDraftJobFromTabDelimitedFiles(def filenames, def csrDelim, def sourcePrefix, def expectedNumberOfFields) {
     //    def file = new File("C:\\LocalApps\\jobstabdelim.txt")
     //    def filenames = ["C:\\LocalApps\\Draft_CSRs_Block1_2jul13.txt",
     //      "C:\\LocalApps\\Draft_CSRs_block2_3jul13.txt",
@@ -69,9 +74,11 @@ class BootStrap {
     def failures = []
     def successes = []
     def job = null
-    for (String filename : filenames) {
+    //for (String filename : filenames) {}
+    filenames.eachWithIndex {filename, index ->
+      def source = "${sourcePrefix}${index+1}"
+      println "${filename} = ${source}"
       def buffer = ""
-      println filename
       def file = new File(filename)
       def joblist = []
       filejobs[filename] = joblist
@@ -87,6 +94,7 @@ class BootStrap {
             updateMaxSize(buffer, expectedNumberOfFields, maxSize, filename, problems)
             job = processDraftJobBuffer(buffer)
             if (job && job.csrRefNo) {
+              job.source = source
               joblist.add(job.csrRefNo)
               if (!job.save(flush: true)) {
                 failures.add(job.csrRefNo)
@@ -112,6 +120,7 @@ class BootStrap {
         updateMaxSize(buffer, expectedNumberOfFields, maxSize, filename, problems)
         job = processDraftJobBuffer(buffer)
         if (job && job.csrRefNo) {
+          job.source = source
           joblist.add(job.csrRefNo)
           if (!job.save(flush: true)) {
             failures.add(job.csrRefNo)
@@ -141,7 +150,7 @@ class BootStrap {
   }
 
 
-  def initFinalJobFromTabDelimitedFiles(def filenames, def csrDelim, def expectedNumberOfFields) {
+  def initFinalJobFromTabDelimitedFiles(def filenames, def csrDelim, def sourcePrefix, def expectedNumberOfFields) {
     //    def file = new File("C:\\LocalApps\\jobstabdelim.txt")
     //    def filenames = ["C:\\LocalApps\\Draft_CSRs_Block1_2jul13.txt",
     //      "C:\\LocalApps\\Draft_CSRs_block2_3jul13.txt",
@@ -161,9 +170,11 @@ class BootStrap {
     def failures = []
     def successes = []
     def job = null
-    for (String filename : filenames) {
+    //for (String filename : filenames) {}
+    filenames.eachWithIndex {filename, index ->
+      def source = "${sourcePrefix}${index+1}"
+      println "${filename} = ${source}"
       def buffer = ""
-      println filename
       def file = new File(filename)
       def joblist = []
       filejobs[filename] = joblist
@@ -179,6 +190,7 @@ class BootStrap {
             updateMaxSize(buffer, expectedNumberOfFields, maxSize, filename, problems)
             job = processFinalJobBuffer(buffer)
             if (job && job.csrRefNo) {
+              job.source = source
               joblist.add(job.csrRefNo)
               if (job?.updateDate && job?.updateDate?.size() > 20) {
                 println "${job.csrRefNo} ${job?.updateDate?.size()} >>>>>${job?.updateDate}<<<<<"
@@ -207,6 +219,7 @@ class BootStrap {
         updateMaxSize(buffer, expectedNumberOfFields, maxSize, filename, problems)
         job = processFinalJobBuffer(buffer)
         if (job && job.csrRefNo) {
+          job.source = source
           joblist.add(job.csrRefNo)
           if (job?.updateDate && job?.updateDate?.size() > 20) {
             println "${job.csrRefNo} ${job?.updateDate?.size()} >>>>>${job?.updateDate}<<<<<"

@@ -1,6 +1,7 @@
 package com.acme
 
 class Job {
+  String source
   String csrRefNo
   String laborCat
   String performanceLevel
@@ -58,6 +59,7 @@ class Job {
   static searchable = true              // <-- Make Job searchable
 
   static constraints = {
+    source (nullable:true)
     csrRefNo (nullable:true)
     laborCat (nullable:true)
     performanceLevel (nullable:true)
