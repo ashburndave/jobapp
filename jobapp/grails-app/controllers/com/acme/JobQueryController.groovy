@@ -11,18 +11,94 @@ class JobQueryController {
     redirect(action: "list", params: params)
   }
 
+  /**
+   * should derive the "Picklist" lists below by examining the database contents
+   * bind the lists to the application context (and not the session)
+   * this data is extremely static, so once lists are built, no real need to refresh them
+   * @return
+   */
+  def buildPicklists() {
+    //    session.sourcePicklist = null  // during development, force the list to be rebuilt
+    //    session.workLocPicklist = null  // during development, force the list to be rebuilt
+    //    session.laborCatPicklist = null  // during development, force the list to be rebuilt
+    //    session.perfLevelPicklist = null    // during development, force the list to be rebuilt
+
+    //    if (!session.sourcePicklist) {
+    //      session.sourcePicklist = ["draftfile1","draftfile2","draftfile3","finalfile1","finalfile2"]
+    //    }
+    //    if (!session.workLocPicklist) {
+    //      session.workLocPicklist = ["Herndon","Tyson's","Reston","Chantilly","McLean"]
+    //    }
+    //    if (!session.laborCatPicklist) {
+    //      session.laborCatPicklist = ["Project Integrator","Tools Developer","Requirements Specialist","Applications Developer",
+    //        "Customer Services and Information Technology Officer","Database Administrator","Web Developer","UNIX Administrator",
+    //        "Software Quality Assurance Specialist/Applications Tester","Help Desk/Support Specialist","Software Developer (Systems Software)"]
+    //    }
+    //    if (!session.perfLevelPicklist) {
+    //      session.perfLevelPicklist = ["Developmental","Expert","Full Performance","Senior","Subject Matter Expert"]
+    //    }
+
+    if (!session.sourcePicklist) {
+      println "creating sourcePicklist"
+      def c = Job.createCriteria()
+      def picklist = c.list() {
+        projections {
+          distinct "source"
+        }
+      }
+      session.sourcePicklist = picklist.sort()
+      println session.sourcePicklist
+    }
+    if (!session.workLocPicklist) {
+      println "creating workLocPicklist"
+      def c = Job.createCriteria()
+      def picklist = c.list() {
+        projections {
+          distinct "workLocation"
+        }
+      }
+      session.workLocPicklist = picklist.sort()
+      println session.workLocPicklist
+    }
+    if (!session.laborCatPicklist) {
+      println "creating laborCatPicklist"
+      def c = Job.createCriteria()
+      def picklist = c.list() {
+        projections {
+          distinct "laborCat"
+        }
+      }
+      session.laborCatPicklist = picklist.sort()
+      println session.laborCatPicklist
+    }
+    if (!session.perfLevelPicklist) {
+      println "creating perfLevelPicklist"
+      def c = Job.createCriteria()
+      def picklist = c.list() {
+        projections {
+          distinct "performanceLevel"
+        }
+      }
+      session.perfLevelPicklist = picklist.sort()
+      println session.perfLevelPicklist
+    }
+  }
+
   def list(Integer max) {
     params.each{key, value ->
       println "$key  $value"
     }
-    session.sourcePicklist = ["draftfile1","draftfile2","draftfile3","finalfile1","finalfile2"] // should derive from database
+    buildPicklists()
     params.max = Math.min(max ?: 10, 100)
     def jobInstanceList = []
     def jobInstanceTotal = jobInstanceList.size()
-    if (params.querySource) {
+    if (params.querySource || params.queryLaborCat || params.queryPerfLev || params.queryWorkLoc) {
       def c = Job.createCriteria()
       jobInstanceList = c.list([max: params.max, offset: params.offset]) {
-        eq("source", params.querySource)
+        if (params.querySource) eq("source", params.querySource)
+        if (params.queryLaborCat) eq("laborCat", params.queryLaborCat)
+        if (params.queryPerfLev) eq("performanceLevel", params.queryPerfLev)
+        if (params.queryWorkLoc) eq("workLocation", params.queryWorkLoc)
         if (params.sort && params.order) order(params.sort, params.order)
         if (params.sort && !params.order) order(params.sort, "desc")
         order("csrRefNo","asc")

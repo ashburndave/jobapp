@@ -17,9 +17,24 @@
 
         <g:form controller="jobQuery" action="list">
           <g:select name="querySource" from="${session.sourcePicklist}" value="${params.querySource}" noSelection="['':'-Choose a source-']"/>
+          <g:select name="queryLaborCat" from="${session.laborCatPicklist}" value="${params.queryLaborCat}" noSelection="['':'-Choose a labor category-']"/>
+          <g:select name="queryPerfLev" from="${session.perfLevelPicklist}" value="${params.queryPerfLev}" noSelection="['':'-Choose a performance level-']"/>
+          <g:select name="queryWorkLoc" from="${session.workLocPicklist}" value="${params.queryWorkLoc}" noSelection="['':'-Choose a work location-']"/>
+          <g:if test="${params.max}">
+            <g:hiddenField name="max" value="${params.max}" />
+          </g:if>         
+          <g:if test="${params.offset}">
+            <g:hiddenField name="offset" value="${params.offset}" />
+          </g:if>         
+          <g:if test="${params.sort}">
+            <g:hiddenField name="sort" value="${params.sort}" />
+          </g:if>          
+          <g:if test="${params.order}">
+            <g:hiddenField name="order" value="${params.order}" />
+          </g:if>
           <input type="submit" value="Run Query" />
         </g:form>
-		
+        		
 		</div>
 
 		<div id="list-job" class="content scaffold-list" role="main">
